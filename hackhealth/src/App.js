@@ -1,30 +1,32 @@
 import './App.css';
 import firebase from "firebase/app";
 import "firebase/database";
+import React, { useState } from 'react';
 const keys = require('./keys.json');
 
-// const list1 = [];
-
 function App() {
+  const [list, setList] = useState([]);
   var database = firebase.database();
-  database.ref("nationality/burmese").get().then(function(snapshot) {
-    if (snapshot.exists()) {
-      snapshot.forEach(function(childSnapshot) {
-        // list1.push(childSnapshot.key);
-        console.log(childSnapshot.key);
+  database.ref("nationality/Brazil").get().then(function(result) {
+  if (result.exists()) {
+      const newList = [];
+      result.forEach(function(item) {
+        newList.push(item.key);
       })
-    }
-  });
-  // const numbers = [1, 2, 3, 4, 5];
-  // console.log(numbers);
-  // console.log(list1);
-  // // const listItems = list1.forEach()
-  // const listItems = list1.map((value) =>
-  //   return(
-  //     <li>{value}</li>
-  //   );
-  // );
+      setList(newList);
+  }
+});
 
+  // const numbers = [...Array(list1.length).keys()];
+  // console.log(numbers);
+  // console.log(list);
+  // const listItems = list1.forEach()
+  const listItems = list.map((item, index) =>
+      (<li key={index}>
+        {item}
+      </li>)
+  );
+  console.log(listItems);
   return (
     <div className="App">
       <header className="App-header">
@@ -39,6 +41,7 @@ function App() {
         >
           Learn React
         </a>
+        <ul>{listItems}</ul>
       </header>
     </div>
   );
