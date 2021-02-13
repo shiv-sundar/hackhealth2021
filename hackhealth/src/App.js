@@ -5,8 +5,18 @@ const keys = require('./keys.json');
 
 function App() {
   var database = firebase.database();
+  database.ref().set({
+    "nationality": {
+      "burmese": "x",
+      "tibetan": "x",
+      "latvian": "x",
+      "nigerian": "x",
+      "indian": "x",
+      "korean": "x"
+    }
+  });
   // console.log(new Database().getDatabase().ref("test/password").key);
-  console.log(database.ref("test/password").key);
+  // console.log(database.ref("test/password").key);
   // console.log(database.ref("test/username").key);
   // database.ref("test/xx/too_bad").get().then(function(snapshot) {
   //   if (snapshot.exists()) {
